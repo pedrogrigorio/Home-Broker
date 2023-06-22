@@ -6,10 +6,10 @@ import (
 	"sync"
 
 	ckafka "github.com/confluentinc/confluent-kafka-go/kafka"
-	"github.com/devfullcycle/imersao13/go/internal/infra/kafka"
-	"github.com/devfullcycle/imersao13/go/internal/market/dto"
-	"github.com/devfullcycle/imersao13/go/internal/market/entity"
-	"github.com/devfullcycle/imersao13/go/internal/market/transformer"
+	"github.com/pedrogrigorio/Home-Broker/go/internal/infra/kafka"
+	"github.com/pedrogrigorio/Home-Broker/go/internal/market/dto"
+	"github.com/pedrogrigorio/Home-Broker/go/internal/market/entity"
+	"github.com/pedrogrigorio/Home-Broker/go/internal/market/transformer"
 )
 
 func main() {
@@ -29,7 +29,6 @@ func main() {
 
 	go kafka.Consume(kafkaMsgChan) // T2
 
-	// recebe do canal do kafka, joga no input, processa joga no output e depois publica no kafka
 	book := entity.NewBook(ordersIn, ordersOut, wg)
 	go book.Trade() // T3
 
